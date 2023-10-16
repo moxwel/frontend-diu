@@ -15,7 +15,7 @@ export const HomePage = () => {
       <NavBar />
       <MyCalendar />
       <ListaEventos />
-      <Compartir url={eventUrl} /> // Cambio aquí
+      <Compartir url={eventUrl} /> 
       <h2>Página de Inicio</h2>
     </div>
   )
