@@ -2,9 +2,11 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { Form, FormGroup, Label, Input, Button, Nav } from 'reactstrap';
+import { useNavigate } from 'react-router-dom';
+import NavBar from './nav_bar';
 
-function Formulario({eventos, setEventos, setFormularioVisible}) {
+function Formulario({eventos, setEventos}) {
   const [formulario, setFormulario] = useState({
     nombre: '',
     fechaInicio: new Date(),
@@ -15,6 +17,9 @@ function Formulario({eventos, setEventos, setFormularioVisible}) {
     ubicacion: '',
     descripcion: ''
   });
+
+  // Usa el hook useHistory para acceder al historial de navegación
+  const navigate = useNavigate();
 
   const agregarEvento = e => {
     e.preventDefault();
@@ -31,8 +36,8 @@ function Formulario({eventos, setEventos, setFormularioVisible}) {
       ubicacion: '',
       descripcion: ''
     });
-    // Oculta el formulario
-    setFormularioVisible(false);
+    // Vuelve a la ruta /
+    navigate('/');
   };
 
   // Esta función maneja el cambio de los valores del formulario
@@ -41,8 +46,14 @@ function Formulario({eventos, setEventos, setFormularioVisible}) {
     setFormulario({...formulario, [name]: value});
   };
 
+  // Esta función cancela el formulario y vuelve a la ruta /
+  const cancelarFormulario = () => {
+    navigate('/');
+  };
+
   return (
     <div className="Formulario">
+      <NavBar />
       <Form onSubmit={agregarEvento}>
         <h2>Agregar evento</h2>
         <FormGroup>
@@ -85,7 +96,9 @@ function Formulario({eventos, setEventos, setFormularioVisible}) {
           <Label for="descripcion">Descripción:</Label>
           <Input type="textarea" name="descripcion" id="descripcion" value={formulario.descripcion} onChange={handleChange} required />
         </FormGroup>
-        <Button type="submit">Agregar evento</Button>
+        {/* Agrega dos botones para enviar o cancelar el formulario */}
+        <Button type="submit">Enviar</Button>
+        <Button type="button" onClick={cancelarFormulario}>Cancelar</Button>
       </Form>
     </div>
   );

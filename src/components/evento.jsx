@@ -2,6 +2,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import NavBar from './nav_bar';
+import { Compartir } from './compartir_evento';
 
 function Evento({eventos}) {
   // Obtiene el índice del evento desde el parámetro de la ruta
@@ -18,6 +19,7 @@ function Evento({eventos}) {
       <p>Modalidad: {evento.modalidad}</p>
       <p>Ubicación: {evento.modalidad === 'online' ? <a href={evento.ubicacion}>{evento.ubicacion}</a> : evento.ubicacion}</p>
       <p>Descripción: {evento.descripcion}</p>
+      <Compartir evento={evento} />
     </div>
   );
 }

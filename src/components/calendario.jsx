@@ -4,7 +4,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { Link } from 'react-router-dom';
 
-function Calendario({eventos, setEventos}) {
+function Calendario({eventos}) {
   const [date, setDate] = useState(new Date());
 
   const onChange = date => {
@@ -65,7 +65,8 @@ function Calendario({eventos, setEventos}) {
 
   return (
     <div className="Calendario">
-      <button onClick={() => setFormularioVisible(true)}>Añadir evento</button>
+      {/* Cambia el botón para añadir evento por un enlace a la ruta /formulario */}
+      <Link to="/formulario">Añadir evento</Link>
       <Calendar
         onChange={onChange}
         value={date}
