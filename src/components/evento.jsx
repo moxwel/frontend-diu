@@ -19,7 +19,7 @@ function Evento({eventos}) {
       <p>Modalidad: {evento.modalidad}</p>
       <p>Ubicación: {evento.modalidad === 'online' ? <a href={evento.ubicacion}>{evento.ubicacion}</a> : evento.ubicacion}</p>
       <p>Descripción: {evento.descripcion}</p>
-      <Compartir evento={evento} />
+      <Compartir />
     </div>
   );
 }

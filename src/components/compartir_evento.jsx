@@ -1,7 +1,9 @@
 import React from 'react';
 import { FaInstagram, FaWhatsapp, FaFacebook, FaTwitter } from 'react-icons/fa';
 
-export function Compartir({ url }) {
+export function Compartir() {
+  const url = window.location.href;
+
     return (
       <div className="CompartirEvento">
         <a href={`https://www.instagram.com/share?url=${url}`} target="_blank" rel="noreferrer">
