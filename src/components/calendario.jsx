@@ -4,6 +4,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { Link } from 'react-router-dom';
 import { Grid } from '@mui/material';
+import { Button } from '@mui/material'
 
 function Calendario({eventos}) {
   const [date, setDate] = useState(new Date());
@@ -71,7 +72,8 @@ function Calendario({eventos}) {
       <Grid container direction="row">
         <Grid item xs={4}>
           <h1>Calendario</h1>
-          <Link to="/formulario">Añadir evento</Link>
+          <Button component={Link} to="/formulario" variant="contained">➕ Añadir evento</Button>
+          <p></p>
           <Calendar
             onChange={onChange}
             value={date}

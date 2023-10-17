@@ -2,9 +2,10 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Form, FormGroup, Label, Input, Button, Nav } from 'reactstrap';
+import { Form, FormGroup, Label, Input, Nav } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
 import NavBar from './nav_bar';
+import { Button, Box } from '@mui/material';
 
 function Formulario({eventos, setEventos}) {
   const [formulario, setFormulario] = useState({
@@ -97,8 +98,8 @@ function Formulario({eventos, setEventos}) {
           <Input type="textarea" name="descripcion" id="descripcion" value={formulario.descripcion} onChange={handleChange} required />
         </FormGroup>
         {/* Agrega dos botones para enviar o cancelar el formulario */}
-        <Button type="submit">Enviar</Button>
-        <Button type="button" onClick={cancelarFormulario}>Cancelar</Button>
+        <Button variant="contained" type="submit">✔ Enviar</Button>
+        <Button variant="contained" onClick={cancelarFormulario}>❌ Cancelar</Button>
       </Form>
     </div>
   );
