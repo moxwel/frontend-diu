@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { Link } from 'react-router-dom';
+import { Grid } from '@mui/material';
 
 function Calendario({eventos}) {
   const [date, setDate] = useState(new Date());
@@ -66,13 +67,24 @@ function Calendario({eventos}) {
   return (
     <div className="Calendario">
       {/* Cambia el botón para añadir evento por un enlace a la ruta /formulario */}
-      <Link to="/formulario">Añadir evento</Link>
-      <Calendar
-        onChange={onChange}
-        value={date}
-        tileContent={renderTileContent}
-      />
-      {renderSelectedDateContent()}
+
+      <Grid container direction="row">
+        <Grid item xs={4}>
+          <h1>Calendario</h1>
+          <Link to="/formulario">Añadir evento</Link>
+          <Calendar
+            onChange={onChange}
+            value={date}
+            tileContent={renderTileContent}
+          />
+        </Grid>
+        <Grid item xs={8}>
+          <h1>Eventos</h1>
+          {renderSelectedDateContent()}
+        </Grid>
+      </Grid>
+
+
     </div>
   );
 }
