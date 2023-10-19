@@ -1,56 +1,52 @@
 /* eslint-disable max-lines-per-function */
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = (_, argv) => ({
-  entry: './src/index.js',
+  entry: "./src/index.js",
   output: {
-    filename: '[name].[contenthash].js',
-    publicPath: '/'
+    filename: "[name].[contenthash].js",
+    publicPath: "/",
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css'
+      filename: "[name].[contenthash].css",
     }),
     new HtmlWebpackPlugin({
-      title: 'Frontend Sample App'
-    })
+      title: "Eventos USM",
+    }),
   ],
   resolve: {
-    extensions: ['*', '.js', '.jsx']
+    extensions: ["*", ".js", ".jsx"],
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        loader: 'babel-loader',
+        loader: "babel-loader",
         options: {
-          presets: [
-            '@babel/preset-react'
-          ]
-        }
+          presets: ["@babel/preset-react"],
+        },
       },
       {
         test: /\.s?css$/,
-        use: argv.mode === 'production'
-          ? [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
-          : ['style-loader', 'css-loader', 'sass-loader']
+        use: argv.mode === "production" ? [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"] : ["style-loader", "css-loader", "sass-loader"],
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
-            loader: 'file-loader'
-          }
-        ]
-      }
-    ]
+            loader: "file-loader",
+          },
+        ],
+      },
+    ],
   },
   devServer: {
     port: 5050,
     hot: false,
     historyApiFallback: {
-      index: '/'
-    }
-  }
-})
+      index: "/",
+    },
+  },
+});
