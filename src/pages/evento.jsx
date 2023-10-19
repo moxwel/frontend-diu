@@ -11,15 +11,18 @@ function Evento({eventos}) {
   const evento = eventos[index];
 
   return (
-    <div className="Evento">
-      <NavBar />
-      <h1>{evento.nombre}</h1>
-      <p>Fecha: {evento.fechaInicio.slice(0,10)} - {evento.fechaTermino.slice(0,10)}</p>
-      <p>Hora: {evento.horaInicio} - {evento.horaTermino}</p>
-      <p>Modalidad: {evento.modalidad}</p>
-      <p>Ubicación: {evento.modalidad === 'online' ? <a href={evento.ubicacion}>{evento.ubicacion}</a> : evento.ubicacion}</p>
-      <p>Descripción: {evento.descripcion}</p>
-      <Compartir />
+    <div className='page'>
+
+      <div className="Evento">
+        <NavBar />
+        <h1>{evento.nombre}</h1>
+        <p>Fecha: {evento.fechaInicio.slice(0,10)} - {evento.fechaTermino.slice(0,10)}</p>
+        <p>Hora: {evento.horaInicio} - {evento.horaTermino}</p>
+        <p>Modalidad: {evento.modalidad}</p>
+        <p>Ubicación: {evento.modalidad === 'online' ? <a href={evento.ubicacion}>{evento.ubicacion}</a> : evento.ubicacion}</p>
+        <p>Descripción: {evento.descripcion}</p>
+        <Compartir />
+      </div>
     </div>
   );
 }
