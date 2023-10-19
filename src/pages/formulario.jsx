@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Form, FormGroup, Label, Input, Nav } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
-import NavBar from './nav_bar';
+import NavBar from '../components/nav_bar';
 import { Button, Box } from '@mui/material';
 
 function Formulario({eventos, setEventos}) {

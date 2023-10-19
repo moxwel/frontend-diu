@@ -2,11 +2,10 @@
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import HomePage from '../pages/home'
-import InternalPage from '../pages/internal'
-import Calendario from './calendario';
-import Formulario from './formulario';
-import Evento from './evento';
+import HomePage from './pages/home'
+import InternalPage from './pages/internal'
+import Formulario from './pages/formulario';
+import Evento from './pages/evento';
 
 const AppRouter = () => {
   // Define el estado para la lista de eventos

@@ -1,8 +1,8 @@
 // Este es el componente Evento que muestra la página de un evento con su información
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import NavBar from './nav_bar';
-import { Compartir } from './compartir_evento';
+import NavBar from '../components/nav_bar';
+import { Compartir } from '../components/compartir_evento';
 
 function Evento({eventos}) {
   // Obtiene el índice del evento desde el parámetro de la ruta
