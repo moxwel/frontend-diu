@@ -8,7 +8,8 @@ import { Grid } from "@mui/material";
 import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-function Evento({ eventos }) {
+
+function Evento({ eventos, setEventos }) {
   // Obtiene el índice del evento desde el parámetro de la ruta
   const { index } = useParams();
   // Obtiene el evento desde la lista de eventos
@@ -17,8 +18,14 @@ function Evento({ eventos }) {
   const navigate = useNavigate();
 
   const eliminarEvento = () => {
-    // Elimina el evento de la lista
-    eventos.splice(index, 1);
+    // Obtiene la lista de eventos del almacenamiento local
+    const eventosGuardados = JSON.parse(localStorage.getItem("eventos"));
+    // Elimina el evento de la lista de eventos
+    eventosGuardados.splice(index, 1);
+    // Actualiza el estado del componente con la lista de eventos actualizada
+    setEventos(eventosGuardados);
+    // Actualiza el almacenamiento local con la lista de eventos actualizada
+    localStorage.setItem("eventos", JSON.stringify(eventosGuardados));
     // Vuelve a la ruta /
     navigate("/");
   };
