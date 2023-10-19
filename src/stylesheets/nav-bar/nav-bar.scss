@@ -1,6 +1,6 @@
-/* Estilos para la barra de navegación */
+/* Estilos para la barra de navegación con color azul marino */
 .nav-bar {
-  background-color: #333; /* Color de fondo */
+  background-color: #001f3f; /* Color de fondo azul marino */
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -24,15 +24,6 @@
 
 /* Estilos para el enlace cuando se coloca el cursor sobre él */
 .nav-bar__link:hover {
-  background-color: #555; /* Color de fondo al pasar el cursor */
+  background-color: #0056b3; /* Color de fondo al pasar el cursor */
 }
 
-/* Opcional: Estilos para la navegación en dispositivos móviles */
-@media (max-width: 768px) {
-  .nav-bar {
-    flex-direction: column;
-  }
-  .nav-bar__link {
-    margin: 5px 0;
-  }
-}
