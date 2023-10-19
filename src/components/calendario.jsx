@@ -15,12 +15,12 @@ function Calendario({eventos}) {
 
   // Esta función devuelve el número de eventos que hay en una fecha dada
   const contarEventos = fecha => {
-    return eventos.filter(evento => evento.fechaInicio.toDateString() === fecha.toDateString()).length;
+    return eventos.filter(evento => evento.fechaInicio.slice(0,10) === fecha.toISOString().slice(0,10)).length;
   };
 
   // Esta función devuelve un array con los eventos que hay en una fecha dada
   const mostrarEventos = fecha => {
-    return eventos.filter(evento => evento.fechaInicio.toDateString() === fecha.toDateString());
+    return eventos.filter(evento => evento.fechaInicio.slice(0,10) === fecha.toISOString().slice(0,10));
   };
 
   // Esta función devuelve un elemento JSX que muestra el número de eventos en una fecha del calendario
@@ -47,7 +47,7 @@ function Calendario({eventos}) {
             {eventosDelDia.map((evento, index) => (
               <li key={index}>
                 <h3>{evento.nombre}</h3>
-                <p>Fecha: {evento.fechaInicio.toLocaleDateString()} - {evento.fechaTermino.toLocaleDateString()}</p>
+                <p>Fecha: {evento.fechaInicio.slice(0,10)} - {evento.fechaTermino.slice(0,10)}</p>
                 <p>Hora: {evento.horaInicio} - {evento.horaTermino}</p>
                 <p>Modalidad: {evento.modalidad}</p>
                 <p>Ubicación: {evento.modalidad === 'online' ? <a href={evento.ubicacion}>{evento.ubicacion}</a> : evento.ubicacion}</p>

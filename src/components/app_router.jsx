@@ -1,5 +1,5 @@
 // Este es el componente AppRouter que usa los tres componentes anteriores y los conecta
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import HomePage from '../pages/home'
@@ -10,7 +10,22 @@ import Evento from './evento';
 
 const AppRouter = () => {
   // Define el estado para la lista de eventos
-  const [eventos, setEventos] = useState([]);
+  const [eventos, setEventos] = useState(() => {
+    const eventosGuardados = localStorage.getItem('eventos');
+    if (eventosGuardados) {
+      return JSON.parse(eventosGuardados);
+    } else {
+      return [];
+    }
+  });
+
+  console.log(eventos);
+
+  // Guarda el estado eventos en el localStorage
+  useEffect(() => {
+    localStorage.setItem('eventos', JSON.stringify(eventos));
+  }, [eventos]);
+
   return (
     <BrowserRouter>
       <Routes>

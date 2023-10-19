@@ -10,8 +10,8 @@ import { Button, Box } from '@mui/material';
 function Formulario({eventos, setEventos}) {
   const [formulario, setFormulario] = useState({
     nombre: '',
-    fechaInicio: new Date(),
-    fechaTermino: new Date(),
+    fechaInicio: new Date().toISOString(),
+    fechaTermino: new Date().toISOString(),
     horaInicio: '',
     horaTermino: '',
     modalidad: '',
@@ -29,8 +29,8 @@ function Formulario({eventos, setEventos}) {
     // Limpia el formulario
     setFormulario({
       nombre: '',
-      fechaInicio: new Date(),
-      fechaTermino: new Date(),
+      fechaInicio: new Date().toISOString(),
+      fechaTermino: new Date().toISOString(),
       horaInicio: '',
       horaTermino: '',
       modalidad: '',
@@ -63,11 +63,11 @@ function Formulario({eventos, setEventos}) {
         </FormGroup>
         <FormGroup>
           <Label for="fechaInicio">Fecha de inicio:</Label>
-          <DatePicker selected={formulario.fechaInicio} onChange={date => setFormulario({...formulario, fechaInicio: date})} dateFormat="dd/MM/yyyy" id="fechaInicio" />
+          <DatePicker selected={Date.parse(formulario.fechaInicio)} onChange={date => setFormulario({...formulario, fechaInicio: date.toISOString()})} dateFormat="dd/MM/yyyy" id="fechaInicio" />
         </FormGroup>
         <FormGroup>
           <Label for="fechaTermino">Fecha de término:</Label>
-          <DatePicker selected={formulario.fechaTermino} onChange={date => setFormulario({...formulario, fechaTermino: date})} dateFormat="dd/MM/yyyy" id="fechaTermino" />
+          <DatePicker selected={Date.parse(formulario.fechaTermino)} onChange={date => setFormulario({...formulario, fechaTermino: date.toISOString()})} dateFormat="dd/MM/yyyy" id="fechaTermino" />
         </FormGroup>
         <FormGroup>
           <Label for="horaInicio">Hora de inicio:</Label>
