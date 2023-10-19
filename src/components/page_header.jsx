@@ -1,6 +1,7 @@
 import React from "react";
 
 import NavBar from "./nav_bar";
+import { Link } from "react-router-dom"; // Importa el componente Link
 
 export const PageHeader = () => {
   var LogoUSM = require("../assets/usm.png").default;
@@ -8,7 +9,10 @@ export const PageHeader = () => {
   return (
     <>
       <h1 className="page__title">
-        <img src={LogoUSM} height={50} alt="logo usm" /> Eventos USM
+        {/* Envuelve el logo y el texto con un elemento Link */}
+        <Link to="/">
+          <img src={LogoUSM} height={50} alt="logo usm" /> Eventos USM
+        </Link>
       </h1>
       <div className="nav-line"></div>
     </>
