@@ -1,8 +1,8 @@
 // Este es el componente Evento que muestra la página de un evento con su información
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import NavBar from '../components/nav_bar';
 import { Compartir } from '../components/compartir_evento';
+import PageHeader from '../components/page_header';
 
 function Evento({eventos}) {
   // Obtiene el índice del evento desde el parámetro de la ruta
@@ -12,10 +12,9 @@ function Evento({eventos}) {
 
   return (
     <div className='page'>
-
+      <PageHeader />
       <div className="Evento">
-        <NavBar />
-        <h1>{evento.nombre}</h1>
+        <h2>{evento.nombre}</h2>
         <p>Fecha: {evento.fechaInicio.slice(0,10)} - {evento.fechaTermino.slice(0,10)}</p>
         <p>Hora: {evento.horaInicio} - {evento.horaTermino}</p>
         <p>Modalidad: {evento.modalidad}</p>

@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Form, FormGroup, Label, Input, Nav } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
-import NavBar from '../components/nav_bar';
+import PageHeader from '../components/page_header';
 import { Button, Box } from '@mui/material';
 
 function Formulario({eventos, setEventos}) {
@@ -54,9 +54,9 @@ function Formulario({eventos, setEventos}) {
 
   return (
     <div className="page">
+      <PageHeader />
     <div className="Formulario">
-      <h1 className="page_title">Agregar evento</h1>
-      <NavBar />
+      <h2>Agregar evento</h2>
       <Form onSubmit={agregarEvento}>
         <FormGroup>
           <Label for="nombre">Nombre:</Label>
