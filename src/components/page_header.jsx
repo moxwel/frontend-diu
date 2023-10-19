@@ -10,7 +10,7 @@ export const PageHeader = () => {
       <h1 className="page__title">
         <img src={LogoUSM} height={50} alt="logo usm" /> Eventos USM
       </h1>
-      <NavBar />
+      <div className="nav-line"></div>
     </>
   );
 };
