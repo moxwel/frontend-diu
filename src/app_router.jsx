@@ -1,16 +1,16 @@
 // Este es el componente AppRouter que usa los tres componentes anteriores y los conecta
-import React, { useState, useEffect } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import HomePage from './pages/home'
-import InternalPage from './pages/internal'
-import Formulario from './pages/formulario';
-import Evento from './pages/evento';
+import HomePage from "./pages/home";
+import InternalPage from "./pages/internal";
+import Formulario from "./pages/formulario";
+import Evento from "./pages/evento";
 
 const AppRouter = () => {
   // Define el estado para la lista de eventos
   const [eventos, setEventos] = useState(() => {
-    const eventosGuardados = localStorage.getItem('eventos');
+    const eventosGuardados = localStorage.getItem("eventos");
     if (eventosGuardados) {
       return JSON.parse(eventosGuardados);
     } else {
@@ -22,19 +22,19 @@ const AppRouter = () => {
 
   // Guarda el estado eventos en el localStorage
   useEffect(() => {
-    localStorage.setItem('eventos', JSON.stringify(eventos));
+    localStorage.setItem("eventos", JSON.stringify(eventos));
   }, [eventos]);
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<HomePage eventos={eventos} setEventos={setEventos} />} /> // Pasa el estado eventos y la función setEventos al componente HomePage
-        <Route path='/internal' element={<InternalPage/>} />
-        <Route path='/formulario' element={<Formulario eventos={eventos} setEventos={setEventos} />} /> // Pasa el estado eventos y la función setEventos al componente Formulario
-        <Route path='/eventos/:index' element={<Evento eventos={eventos} />} /> // Pasa el estado eventos al componente Evento
+        <Route path="/" element={<HomePage eventos={eventos} setEventos={setEventos} />} /> // Pasa el estado eventos y la función setEventos al componente HomePage
+        <Route path="/internal" element={<InternalPage />} />
+        <Route path="/formulario" element={<Formulario eventos={eventos} setEventos={setEventos} />} /> // Pasa el estado eventos y la función setEventos al componente Formulario
+        <Route path="/eventos/:index" element={<Evento eventos={eventos} />} /> // Pasa el estado eventos al componente Evento
       </Routes>
     </BrowserRouter>
-  )
-}
+  );
+};
 
 export default AppRouter;

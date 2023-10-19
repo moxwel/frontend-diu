@@ -1,15 +1,12 @@
-import React from 'react'
-import ReactDom from 'react-dom'
+import React from "react";
+import ReactDom from "react-dom";
 
-import AppRouter from './app_router'
+import AppRouter from "./app_router";
 
-import './stylesheets/index.scss'
+import "./stylesheets/index.scss";
 
-const root = document.createElement('div')
-root.setAttribute('id', 'root')
-document.body.appendChild(root)
+const root = document.createElement("div");
+root.setAttribute("id", "root");
+document.body.appendChild(root);
 
-ReactDom.render(
-  <AppRouter />,
-  document.getElementById('root')
-)
+ReactDom.render(<AppRouter />, document.getElementById("root"));
