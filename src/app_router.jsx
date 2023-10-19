@@ -31,7 +31,7 @@ const AppRouter = () => {
         <Route path="/" element={<HomePage eventos={eventos} setEventos={setEventos} />} /> // Pasa el estado eventos y la función setEventos al componente HomePage
         <Route path="/internal" element={<InternalPage />} />
         <Route path="/formulario" element={<Formulario eventos={eventos} setEventos={setEventos} />} /> // Pasa el estado eventos y la función setEventos al componente Formulario
-        <Route path="/eventos/:index" element={<Evento eventos={eventos} />} /> // Pasa el estado eventos al componente Evento
+        <Route path="/eventos/:index" element={<Evento eventos={eventos} setEventos={setEventos} />} /> // Pasa el estado eventos al componente Evento
       </Routes>
     </BrowserRouter>
   );
