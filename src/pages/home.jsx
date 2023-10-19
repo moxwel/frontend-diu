@@ -1,6 +1,5 @@
 // Este es el componente HomePage modificado
 import React from "react";
-
 import PageHeader from "../components/page_header";
 import Calendario from "../components/calendario";
 
