@@ -7,9 +7,8 @@ export const HomePage = ({eventos, setEventos}) => {
   // Recibe el estado eventos y la función setEventos como props
   return (
     <div className='page'>
-      <h1 className='page__title'>Frontend Sample App</h1>
+      <h1 className='page__title'>Eventos USM</h1>
       <NavBar />
-      <h2>Página de Inicio</h2>
       {/* Renderiza el componente Calendario y le pasa el estado eventos como prop */}
       <Calendario eventos={eventos} />
     </div>
