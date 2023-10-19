@@ -6,6 +6,8 @@ import { Form, FormGroup, Label, Input, Nav } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import PageHeader from "../components/page_header";
 import { Button, Box } from "@mui/material";
+import EventAvailableIcon from "@mui/icons-material/EventAvailable";
+import CancelIcon from "@mui/icons-material/Cancel";
 
 function Formulario({ eventos, setEventos }) {
   const [formulario, setFormulario] = useState({
@@ -95,11 +97,11 @@ function Formulario({ eventos, setEventos }) {
             <Input type="textarea" name="descripcion" id="descripcion" value={formulario.descripcion} onChange={handleChange} required />
           </FormGroup>
           {/* Agrega dos botones para enviar o cancelar el formulario */}
-          <Button variant="contained" type="submit">
-            ✔ Enviar
+          <Button variant="contained" type="submit" startIcon={<EventAvailableIcon />}>
+            Crear
           </Button>
-          <Button variant="contained" onClick={cancelarFormulario}>
-            ❌ Cancelar
+          <Button variant="contained" color="error" onClick={cancelarFormulario} startIcon={<CancelIcon />}>
+            Cancelar
           </Button>
         </Form>
       </div>

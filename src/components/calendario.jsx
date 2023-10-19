@@ -5,6 +5,8 @@ import "react-calendar/dist/Calendar.css";
 import { Link } from "react-router-dom";
 import { Grid } from "@mui/material";
 import { Button } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 function Calendario({ eventos }) {
   const [date, setDate] = useState(new Date());
@@ -55,7 +57,9 @@ function Calendario({ eventos }) {
                 </p>
                 <p>Modalidad: {evento.modalidad}</p>
                 <p>Ubicación: {evento.modalidad === "online" ? <a href={evento.ubicacion}>{evento.ubicacion}</a> : evento.ubicacion}</p>
-                <Link to={`/eventos/${index}`}>Más información</Link>
+                <Button component={Link} to={`/eventos/${index}`} variant="contained" startIcon={<VisibilityIcon />}>
+                  Más Información
+                </Button>
               </li>
             ))}
           </ul>
@@ -76,8 +80,8 @@ function Calendario({ eventos }) {
       <Grid container direction="row">
         <Grid item xs={4}>
           <h1>Calendario</h1>
-          <Button component={Link} to="/formulario" variant="contained">
-            ➕ Añadir evento
+          <Button component={Link} to="/formulario" variant="contained" color="warning" startIcon={<AddIcon />}>
+            Añadir evento
           </Button>
           <p></p>
           <Calendar onChange={onChange} value={date} tileContent={renderTileContent} />
