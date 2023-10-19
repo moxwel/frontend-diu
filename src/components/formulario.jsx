@@ -53,10 +53,11 @@ function Formulario({eventos, setEventos}) {
   };
 
   return (
+    <div className="page">
     <div className="Formulario">
+      <h1 className="page_title">Agregar evento</h1>
       <NavBar />
       <Form onSubmit={agregarEvento}>
-        <h2>Agregar evento</h2>
         <FormGroup>
           <Label for="nombre">Nombre:</Label>
           <Input type="text" name="nombre" id="nombre" value={formulario.nombre} onChange={handleChange} required />
@@ -102,6 +103,8 @@ function Formulario({eventos, setEventos}) {
         <Button variant="contained" onClick={cancelarFormulario}>❌ Cancelar</Button>
       </Form>
     </div>
+    </div> 
+
   );
 }
 
