@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Form, FormGroup, Label, Input, Nav } from "reactstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import PageHeader from "../components/page_header";
 import { Button, Box } from "@mui/material";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
@@ -19,6 +19,8 @@ function EditarEvento({ eventos, setEventos }) {
 
   const [formulario, setFormulario] = useState({
     nombre: evento.nombre,
+    dateInicio: new Date(evento.dateInicio),
+    dateTermino: new Date(evento.dateTermino),
     fechaInicio: evento.fechaInicio,
     fechaTermino: evento.fechaTermino,
     horaInicio: evento.horaInicio,
@@ -48,10 +50,12 @@ function EditarEvento({ eventos, setEventos }) {
     // Limpia el formulario
     setFormulario({
       nombre: "",
-      fechaInicio: new Date().toISOString(),
-      fechaTermino: new Date().toISOString(),
-      horaInicio: "",
-      horaTermino: "",
+      dateInicio: new Date(),
+      dateTermino: new Date(),
+      fechaInicio: new Date().toLocaleDateString(),
+      fechaTermino: new Date().toLocaleDateString(),
+      horaInicio: new Date().toLocaleTimeString().slice(0, 5),
+      horaTermino: new Date().toLocaleTimeString().slice(0, 5),
       modalidad: "",
       ubicacion: "",
       descripcion: "",
@@ -72,11 +76,35 @@ function EditarEvento({ eventos, setEventos }) {
           </FormGroup>
           <FormGroup>
             <Label for="fechaInicio">Fecha de inicio:</Label>
-            <DatePicker selected={Date.parse(formulario.fechaInicio)} onChange={(date) => setFormulario({ ...formulario, fechaInicio: date.toISOString() })} dateFormat="dd/MM/yyyy" id="fechaInicio" />
+            <DatePicker
+              selected={formulario.dateInicio}
+              onChange={(date) => {
+                setFormulario({
+                  ...formulario,
+                  dateInicio: date,
+                  fechaInicio: date.toLocaleDateString(),
+                  horaInicio: date.toLocaleTimeString().slice(0, 5),
+                });
+              }}
+              dateFormat="dd/MM/yyyy"
+              id="fechaInicio"
+            />
           </FormGroup>
           <FormGroup>
             <Label for="fechaTermino">Fecha de término:</Label>
-            <DatePicker selected={Date.parse(formulario.fechaTermino)} onChange={(date) => setFormulario({ ...formulario, fechaTermino: date.toISOString() })} dateFormat="dd/MM/yyyy" id="fechaTermino" />
+            <DatePicker
+              selected={formulario.dateTermino}
+              onChange={(date) => {
+                setFormulario({
+                  ...formulario,
+                  dateTermino: date,
+                  fechaTermino: date.toLocaleDateString(),
+                  horaTermino: date.toLocaleTimeString().slice(0, 5),
+                });
+              }}
+              dateFormat="dd/MM/yyyy"
+              id="fechaTermino"
+            />
           </FormGroup>
           <FormGroup>
             <Label for="horaInicio">Hora de inicio:</Label>

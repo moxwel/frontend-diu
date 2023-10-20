@@ -43,7 +43,7 @@ function Evento({ eventos, setEventos }) {
           <div className="Evento">
             <h2>{evento.nombre}</h2>
             <p>
-              Fecha: {evento.fechaInicio.slice(0, 10)} - {evento.fechaTermino.slice(0, 10)}
+              Fecha: {evento.fechaInicio} - {evento.fechaTermino}
             </p>
             <p>
               Hora: {evento.horaInicio} - {evento.horaTermino}

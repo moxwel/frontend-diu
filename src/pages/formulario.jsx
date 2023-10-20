@@ -12,10 +12,12 @@ import CancelIcon from "@mui/icons-material/Cancel";
 function Formulario({ eventos, setEventos }) {
   const [formulario, setFormulario] = useState({
     nombre: "",
-    fechaInicio: new Date().toISOString(),
-    fechaTermino: new Date().toISOString(),
-    horaInicio: "",
-    horaTermino: "",
+    dateInicio: new Date(),
+    dateTermino: new Date(),
+    fechaInicio: new Date().toLocaleDateString(),
+    fechaTermino: new Date().toLocaleDateString(),
+    horaInicio: new Date().toLocaleTimeString().slice(0, 5),
+    horaTermino: new Date().toLocaleTimeString().slice(0, 5),
     modalidad: "",
     ubicacion: "",
     descripcion: "",
@@ -31,10 +33,12 @@ function Formulario({ eventos, setEventos }) {
     // Limpia el formulario
     setFormulario({
       nombre: "",
-      fechaInicio: new Date().toISOString(),
-      fechaTermino: new Date().toISOString(),
-      horaInicio: "",
-      horaTermino: "",
+      dateInicio: new Date(),
+      dateTermino: new Date(),
+      fechaInicio: new Date().toLocaleDateString(),
+      fechaTermino: new Date().toLocaleDateString(),
+      horaInicio: new Date().toLocaleTimeString().slice(0, 5),
+      horaTermino: new Date().toLocaleTimeString().slice(0, 5),
       modalidad: "",
       ubicacion: "",
       descripcion: "",
@@ -47,6 +51,7 @@ function Formulario({ eventos, setEventos }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormulario({ ...formulario, [name]: value });
+    console.log(formulario);
   };
 
   // Esta función cancela el formulario y vuelve a la ruta /
@@ -66,11 +71,35 @@ function Formulario({ eventos, setEventos }) {
           </FormGroup>
           <FormGroup>
             <Label for="fechaInicio">Fecha de inicio:</Label>
-            <DatePicker selected={Date.parse(formulario.fechaInicio)} onChange={(date) => setFormulario({ ...formulario, fechaInicio: date.toISOString() })} dateFormat="dd/MM/yyyy" id="fechaInicio" />
+            <DatePicker
+              selected={formulario.dateInicio}
+              onChange={(date) => {
+                setFormulario({
+                  ...formulario,
+                  dateInicio: date,
+                  fechaInicio: date.toLocaleDateString(),
+                  horaInicio: date.toLocaleTimeString().slice(0, 5),
+                });
+              }}
+              dateFormat="dd/MM/yyyy"
+              id="fechaInicio"
+            />
           </FormGroup>
           <FormGroup>
             <Label for="fechaTermino">Fecha de término:</Label>
-            <DatePicker selected={Date.parse(formulario.fechaTermino)} onChange={(date) => setFormulario({ ...formulario, fechaTermino: date.toISOString() })} dateFormat="dd/MM/yyyy" id="fechaTermino" />
+            <DatePicker
+              selected={formulario.dateTermino}
+              onChange={(date) => {
+                setFormulario({
+                  ...formulario,
+                  dateTermino: date,
+                  fechaTermino: date.toLocaleDateString(),
+                  horaTermino: date.toLocaleTimeString().slice(0, 5),
+                });
+              }}
+              dateFormat="dd/MM/yyyy"
+              id="fechaTermino"
+            />
           </FormGroup>
           <FormGroup>
             <Label for="horaInicio">Hora de inicio:</Label>
