@@ -6,6 +6,7 @@ import HomePage from "./pages/home";
 import InternalPage from "./pages/internal";
 import Formulario from "./pages/formulario";
 import Evento from "./pages/evento";
+import EditarEvento from "./pages/editar_evento";
 
 const AppRouter = () => {
   // Define el estado para la lista de eventos
@@ -32,6 +33,7 @@ const AppRouter = () => {
         <Route path="/internal" element={<InternalPage />} />
         <Route path="/formulario" element={<Formulario eventos={eventos} setEventos={setEventos} />} /> // Pasa el estado eventos y la función setEventos al componente Formulario
         <Route path="/eventos/:index" element={<Evento eventos={eventos} setEventos={setEventos} />} /> // Pasa el estado eventos al componente Evento
+        <Route path="/eventos/editar/:index" element={<EditarEvento eventos={eventos} setEventos={setEventos} />} />
       </Routes>
     </BrowserRouter>
   );
