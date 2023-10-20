@@ -54,15 +54,18 @@ function Evento({ eventos, setEventos }) {
             <Compartir />
           </div>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={6} flexDirection={"column"}>
           <h2>Administrar</h2>
-          <Button variant="contained" color="warning" onClick={editarEvento} startIcon={<EventRepeatIcon />}>
-            Editar Evento
-          </Button>
-          {/* Cuando borra elementos, no los actualiza en el localstore, hay que arreglar eso */}
-          <Button variant="contained" color="error" onClick={eliminarEvento} startIcon={<DeleteIcon />}>
-            Eliminar evento
-          </Button>
+          <p>
+            <Button variant="contained" color="warning" onClick={editarEvento} startIcon={<EventRepeatIcon />}>
+              Editar Evento
+            </Button>
+          </p>
+          <p>
+            <Button variant="contained" color="error" onClick={eliminarEvento} startIcon={<DeleteIcon />}>
+              Eliminar evento
+            </Button>
+          </p>
         </Grid>
       </Grid>
     </div>
