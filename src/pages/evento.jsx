@@ -45,21 +45,6 @@ function Evento({ eventos, setEventos }) {
 
       <Grid container direction="row">
         <Grid item xs={6}>
-          <div className="Evento">
-            <h2>{evento.nombre}</h2>
-            <p>
-              Fecha: {evento.fechaInicio} - {evento.fechaTermino}
-            </p>
-            <p>
-              Hora: {evento.horaInicio} - {evento.horaTermino}
-            </p>
-            <p>Modalidad: {evento.modalidad}</p>
-            <p>Ubicación: {evento.modalidad === "online" ? <a href={evento.ubicacion}>{evento.ubicacion}</a> : evento.ubicacion}</p>
-            <p>Descripción: {evento.descripcion}</p>
-            <Compartir />
-          </div>
-        </Grid>
-        <Grid item xs={6} flexDirection={"column"}>
           <h2>Administrar</h2>
           <p>
             <Button variant="contained" color="info" onClick={volver} startIcon={<ArrowBackIcon />}>
@@ -76,6 +61,21 @@ function Evento({ eventos, setEventos }) {
               Eliminar evento
             </Button>
           </p>
+        </Grid>
+        <Grid item xs={6}>
+          <div className="Evento">
+            <h2>{evento.nombre}</h2>
+            <p>
+              Fecha: {evento.fechaInicio} - {evento.fechaTermino}
+            </p>
+            <p>
+              Hora: {evento.horaInicio} - {evento.horaTermino}
+            </p>
+            <p>Modalidad: {evento.modalidad}</p>
+            <p>Ubicación: {evento.modalidad === "online" ? <a href={evento.ubicacion}>{evento.ubicacion}</a> : evento.ubicacion}</p>
+            <p>Descripción: {evento.descripcion}</p>
+            <Compartir />
+          </div>
         </Grid>
       </Grid>
     </div>
