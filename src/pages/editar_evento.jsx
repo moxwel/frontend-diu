@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Form, FormGroup, Label, Input, Nav } from "reactstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import PageHeader from "../components/page_header";
 import { Button, Box } from "@mui/material";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
