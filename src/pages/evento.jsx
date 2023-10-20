@@ -7,7 +7,7 @@ import PageHeader from "../components/page_header";
 import { Grid } from "@mui/material";
 import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-
+import EventRepeatIcon from "@mui/icons-material/EventRepeat";
 
 function Evento({ eventos, setEventos }) {
   // Obtiene el índice del evento desde el parámetro de la ruta
@@ -28,6 +28,10 @@ function Evento({ eventos, setEventos }) {
     localStorage.setItem("eventos", JSON.stringify(eventosGuardados));
     // Vuelve a la ruta /
     navigate("/");
+  };
+
+  const editarEvento = () => {
+    navigate("/eventos/editar/" + index);
   };
 
   return (
@@ -52,7 +56,9 @@ function Evento({ eventos, setEventos }) {
         </Grid>
         <Grid item xs={6}>
           <h2>Administrar</h2>
-
+          <Button variant="contained" color="warning" onClick={editarEvento} startIcon={<EventRepeatIcon />}>
+            Editar Evento
+          </Button>
           {/* Cuando borra elementos, no los actualiza en el localstore, hay que arreglar eso */}
           <Button variant="contained" color="error" onClick={eliminarEvento} startIcon={<DeleteIcon />}>
             Eliminar evento
