@@ -9,6 +9,7 @@ import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EventRepeatIcon from "@mui/icons-material/EventRepeat";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import EmailIcon from "@mui/icons-material/Email";
 
 function Evento({ eventos, setEventos }) {
   // Obtiene el índice del evento desde el parámetro de la ruta
@@ -39,6 +40,11 @@ function Evento({ eventos, setEventos }) {
     navigate("/");
   };
 
+  const notificar = () => {
+    //muestra ventana que dice correos enviados con éxito
+    alert("Correos enviados con éxito");
+  };
+
   return (
     <div className="page">
       <PageHeader />
@@ -59,6 +65,11 @@ function Evento({ eventos, setEventos }) {
           <p>
             <Button variant="contained" color="error" onClick={eliminarEvento} startIcon={<DeleteIcon />}>
               Eliminar evento
+            </Button>
+          </p>
+          <p>
+            <Button variant="contained" color="info" onClick={notificar} startIcon={<EmailIcon />}>
+              Notificar por correo
             </Button>
           </p>
         </Grid>
