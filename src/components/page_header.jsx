@@ -8,7 +8,7 @@ export const PageHeader = () => {
 
   return (
     <>
-      <div className="nav-line" style={{ display: "flex", alignItems: "center" }}>
+      <div className="nav-line" style={{ display: "flex", alignItems: "center", paddingLeft: "20px" }}>
         <h1 className="page__title">
           {/* Envuelve el logo y el texto con un elemento Link */}
           <Link to="/" className="page__title" style={{ display: "flex", alignItems: "center" }}>

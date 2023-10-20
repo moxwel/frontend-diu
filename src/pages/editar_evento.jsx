@@ -68,7 +68,7 @@ function EditarEvento({ eventos, setEventos }) {
     <div className="page">
       <PageHeader />
       <div className="Formulario">
-        <h2>Editar Evento {evento.nombre}</h2>
+        <h2>Editar Evento: {evento.nombre}</h2>
         <Form onSubmit={guardarEdicion}>
           <FormGroup>
             <Label for="nombre">Nombre:</Label>
