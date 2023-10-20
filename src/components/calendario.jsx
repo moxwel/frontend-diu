@@ -8,6 +8,14 @@ import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
+
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+
+import Typography from '@mui/material/Typography';
+
 function Calendario({ eventos }) {
   const [date, setDate] = useState(new Date());
 
@@ -47,8 +55,12 @@ function Calendario({ eventos }) {
           <h2>Eventos del día {date.toLocaleDateString()}</h2>
           <ul>
             {eventosDelDia.map((evento, index) => (
-              <li key={index}>
-                <h3>{evento.nombre}</h3>
+              <Card sx={{ border: "1px solid #ccc", margin: "10px", minWidth: "300px" }}>
+              <CardContent>
+              <Typography sx={{ fontSize: 20, fontWeight: "bold", textDecoration: "underline" }} color="text.secondary" gutterBottom>
+                {evento.nombre.toUpperCase()}
+              </Typography>
+              <div sx={{ textAlign: "center" }}>
                 <p>
                   Fecha: {evento.fechaInicio.slice(0, 10)} - {evento.fechaTermino.slice(0, 10)}
                 </p>
@@ -56,11 +68,28 @@ function Calendario({ eventos }) {
                   Hora: {evento.horaInicio} - {evento.horaTermino}
                 </p>
                 <p>Modalidad: {evento.modalidad}</p>
-                <p>Ubicación: {evento.modalidad === "online" ? <a href={evento.ubicacion}>{evento.ubicacion}</a> : evento.ubicacion}</p>
-                <Button component={Link} to={`/eventos/${index}`} variant="contained" startIcon={<VisibilityIcon />}>
+                <p>
+                  Ubicación:{" "}
+                  {evento.modalidad === "online" ? (
+                    <a href={evento.ubicacion}>{evento.ubicacion}</a>
+                  ) : (
+                    evento.ubicacion
+                  )}
+                </p>
+              </div>
+              </CardContent>
+              <CardActions>
+                <Button
+                  component={Link}
+                  to={`/eventos/${index}`}
+                  variant="contained"
+                  startIcon={<VisibilityIcon />}
+                >
                   Más Información
                 </Button>
-              </li>
+              </CardActions>
+            </Card>
+              
             ))}
           </ul>
         </div>
