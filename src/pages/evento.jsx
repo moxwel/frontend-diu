@@ -8,6 +8,7 @@ import { Grid } from "@mui/material";
 import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EventRepeatIcon from "@mui/icons-material/EventRepeat";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function Evento({ eventos, setEventos }) {
   // Obtiene el índice del evento desde el parámetro de la ruta
@@ -34,6 +35,10 @@ function Evento({ eventos, setEventos }) {
     navigate("/eventos/editar/" + index);
   };
 
+  const volver = () => {
+    navigate("/");
+  };
+
   return (
     <div className="page">
       <PageHeader />
@@ -56,6 +61,11 @@ function Evento({ eventos, setEventos }) {
         </Grid>
         <Grid item xs={6} flexDirection={"column"}>
           <h2>Administrar</h2>
+          <p>
+            <Button variant="contained" color="info" onClick={volver} startIcon={<ArrowBackIcon />}>
+              Volver
+            </Button>
+          </p>
           <p>
             <Button variant="contained" color="warning" onClick={editarEvento} startIcon={<EventRepeatIcon />}>
               Editar Evento
