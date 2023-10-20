@@ -8,13 +8,15 @@ export const PageHeader = () => {
 
   return (
     <>
-      <h1 className="page__title">
-        {/* Envuelve el logo y el texto con un elemento Link */}
-        <Link to="/">
-          <img src={LogoUSM} height={50} alt="logo usm" /> Eventos USM
-        </Link>
-      </h1>
-      <div className="nav-line"></div>
+      <div className="nav-line" style={{ display: "flex", alignItems: "center" }}>
+        <h1 className="page__title">
+          {/* Envuelve el logo y el texto con un elemento Link */}
+          <Link to="/" className="page__title" style={{ display: "flex", alignItems: "center" }}>
+            <img src={LogoUSM} height={50} alt="logo usm" style={{ marginRight: "10px" }} />
+            Eventos USM
+          </Link>
+        </h1>
+      </div>
     </>
   );
 };

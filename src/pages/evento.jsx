@@ -44,7 +44,7 @@ function Evento({ eventos, setEventos }) {
       <PageHeader />
 
       <Grid container direction="row">
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <h2>Administrar</h2>
           <p>
             <Button variant="contained" color="info" onClick={volver} startIcon={<ArrowBackIcon />}>
@@ -62,7 +62,7 @@ function Evento({ eventos, setEventos }) {
             </Button>
           </p>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={8}>
           <div className="Evento">
             <h2>{evento.nombre}</h2>
             <p>

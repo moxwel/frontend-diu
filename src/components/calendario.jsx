@@ -52,32 +52,30 @@ function Calendario({ eventos }) {
       return (
         <div className="selected-date-content">
           <h2>Eventos del día {date.toLocaleDateString()}</h2>
-          <ul>
-            {eventosDelDia.map((evento, index) => (
-              <Card sx={{ border: "1px solid #ccc", margin: "10px", minWidth: "300px" }}>
-                <CardContent>
-                  <Typography sx={{ fontSize: 20, fontWeight: "bold", textDecoration: "underline" }} color="text.secondary" gutterBottom>
-                    {evento.nombre.toUpperCase()}
-                  </Typography>
-                  <div sx={{ textAlign: "center" }}>
-                    <p>
-                      Fecha: {evento.fechaInicio} - {evento.fechaTermino}
-                    </p>
-                    <p>
-                      Hora: {evento.horaInicio} - {evento.horaTermino}
-                    </p>
-                    <p>Modalidad: {evento.modalidad}</p>
-                    <p>Ubicación: {evento.modalidad === "online" ? <a href={evento.ubicacion}>{evento.ubicacion}</a> : evento.ubicacion}</p>
-                  </div>
-                </CardContent>
-                <CardActions>
-                  <Button component={Link} to={`/eventos/${index}`} variant="contained" startIcon={<VisibilityIcon />}>
-                    Más Información
-                  </Button>
-                </CardActions>
-              </Card>
-            ))}
-          </ul>
+          {eventosDelDia.map((evento, index) => (
+            <Card sx={{ border: "1px solid #ccc", margin: "10px", minWidth: "300px" }}>
+              <CardContent>
+                <Typography sx={{ fontSize: 22, fontWeight: "bold" }} color="text.secondary" gutterBottom>
+                  {evento.nombre.toUpperCase()}
+                </Typography>
+                <div sx={{ textAlign: "center" }}>
+                  <p>
+                    Fecha: {evento.fechaInicio} - {evento.fechaTermino}
+                  </p>
+                  <p>
+                    Hora: {evento.horaInicio} - {evento.horaTermino}
+                  </p>
+                  <p>Modalidad: {evento.modalidad}</p>
+                  <p>Ubicación: {evento.modalidad === "online" ? <a href={evento.ubicacion}>{evento.ubicacion}</a> : evento.ubicacion}</p>
+                </div>
+              </CardContent>
+              <CardActions>
+                <Button component={Link} to={`/eventos/${index}`} variant="contained" startIcon={<VisibilityIcon />}>
+                  Más Información
+                </Button>
+              </CardActions>
+            </Card>
+          ))}
         </div>
       );
     }
