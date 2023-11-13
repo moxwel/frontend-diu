@@ -1,10 +1,8 @@
 // Este es el componente Formulario que muestra el formulario para agregar un evento
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { Form, FormGroup, Label, Input, Nav } from "reactstrap";
-import "react-datepicker/dist/react-datepicker.css";
-import DatePicker from "react-datepicker";
 
 import { Button, Grid } from "@mui/material";
 
@@ -14,18 +12,50 @@ import CancelIcon from "@mui/icons-material/Cancel";
 
 import PageHeader from "../components/page_header";
 
+// Funcion que recibe una fecha y devuelve un objeto con la fecha y la hora formateadas
+// Fecha en formato YYYY-MM-DD y hora en formato HH:MM
+function formatearFecha(fecha) {
+  var year = fecha.getFullYear();
+  var month = ("0" + (fecha.getMonth() + 1)).slice(-2);
+  var day = ("0" + fecha.getDate()).slice(-2);
+  var hours = ("0" + fecha.getHours()).slice(-2);
+  var minutes = ("0" + fecha.getMinutes()).slice(-2);
+
+  var formattedDate = year + "-" + month + "-" + day;
+  var formattedTime = hours + ":" + minutes;
+
+  return { formattedDate, formattedTime };
+}
+
 function Formulario({ eventos, setEventos }) {
-  const [formulario, setFormulario] = useState({
-    nombre: "",
-    dateInicio: new Date(),
-    dateTermino: new Date(),
-    fechaInicio: new Date().toLocaleDateString(),
-    fechaTermino: new Date().toLocaleDateString(),
-    horaInicio: new Date().toLocaleTimeString().slice(0, 5),
-    horaTermino: new Date().toLocaleTimeString().slice(0, 5),
-    modalidad: "",
-    ubicacion: "",
-    descripcion: "",
+  // Se recibe la fecha seleccionada como parámetro en la URL, viene en formato ISO
+  var { fechaSelec } = useParams();
+
+  const [formulario, setFormulario] = useState(() => {
+    if (!fechaSelec) {
+      console.log("[Formulario] No hay fecha seleccionada. Usando fecha actual...");
+      fechaSelec = new Date();
+    } else {
+      // Convierte la fecha de ISO a Date
+      fechaSelec = new Date(fechaSelec);
+    }
+
+    console.log("[Formulario] fechaSelec: " + fechaSelec);
+
+    var { formattedDate, formattedTime } = formatearFecha(fechaSelec);
+
+    console.log("[Formulario] formattedDate: " + formattedDate + " , formattedTime: " + formattedTime);
+
+    return {
+      nombre: "",
+      fechaInicio: formattedDate,
+      fechaTermino: formattedDate,
+      horaInicio: formattedTime,
+      horaTermino: formattedTime,
+      modalidad: "",
+      ubicacion: "",
+      descripcion: "",
+    };
   });
 
   // Usa el hook useHistory para acceder al historial de navegación
@@ -38,12 +68,10 @@ function Formulario({ eventos, setEventos }) {
     // Limpia el formulario
     setFormulario({
       nombre: "",
-      dateInicio: new Date(),
-      dateTermino: new Date(),
-      fechaInicio: new Date().toLocaleDateString(),
-      fechaTermino: new Date().toLocaleDateString(),
-      horaInicio: new Date().toLocaleTimeString().slice(0, 5),
-      horaTermino: new Date().toLocaleTimeString().slice(0, 5),
+      fechaInicio: new Date(),
+      fechaTermino: new Date(),
+      horaInicio: new Date(),
+      horaTermino: new Date(),
       modalidad: "",
       ubicacion: "",
       descripcion: "",
@@ -87,37 +115,37 @@ function Formulario({ eventos, setEventos }) {
                 <Label for="nombre">Nombre:</Label>
                 <Input type="text" name="nombre" id="nombre" value={formulario.nombre} onChange={handleChange} required />
               </FormGroup>
-              <FormGroup>
-                <Label for="fechaInicio">Fecha de inicio:</Label>
-                <Input
-                  type="date"
-                  name="fechaInicio"
-                  id="fechaInicio"
-                  value={formulario.fechaInicio}
-                  onChange={(e) => {
-                    const date = new Date(e.target.value);
-                    setFormulario({
-                      ...formulario,
-                      dateInicio: date,
-                      fechaInicio: date.toLocaleDateString(),
-                      horaInicio: date.toLocaleTimeString().slice(0, 5),
-                    });
-                  }}
-                  required
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label for="fechaTermino">Fecha de término:</Label>
-                <Input type="date" name="fechaTermino" id="fechaTermino" value={formulario.dateInicio} onChange={handleChange} required />
-              </FormGroup>
-              <FormGroup>
-                <Label for="horaInicio">Hora de inicio:</Label>
-                <Input type="time" name="horaInicio" id="horaInicio" value={formulario.horaInicio} onChange={handleChange} required />
-              </FormGroup>
-              <FormGroup>
-                <Label for="horaTermino">Hora de término:</Label>
-                <Input type="time" name="horaTermino" id="horaTermino" value={formulario.horaTermino} onChange={handleChange} required />
-              </FormGroup>
+              <Grid container>
+                <Grid item sm={12} md={6}>
+                  <FormGroup>
+                    <Label for="fechaInicio">Fecha de inicio:</Label>
+                    <Input type="date" name="fechaInicio" id="fechaInicio" value={formulario.fechaInicio} onChange={handleChange} required />
+                  </FormGroup>
+                </Grid>
+
+                <Grid item sm={12} md={6}>
+                  <FormGroup>
+                    <Label for="fechaTermino">Fecha de término:</Label>
+                    <Input type="date" name="fechaTermino" id="fechaTermino" value={formulario.fechaTermino} onChange={handleChange} required />
+                  </FormGroup>
+                </Grid>
+              </Grid>
+
+              <Grid container>
+                <Grid item sm={12} md={6}>
+                  <FormGroup>
+                    <Label for="horaInicio">Hora de inicio:</Label>
+                    <Input type="time" name="horaInicio" id="horaInicio" value={formulario.horaInicio} onChange={handleChange} required />
+                  </FormGroup>
+                </Grid>
+                <Grid item sm={12} md={6}>
+                  <FormGroup>
+                    <Label for="horaTermino">Hora de término:</Label>
+                    <Input type="time" name="horaTermino" id="horaTermino" value={formulario.horaTermino} onChange={handleChange} required />
+                  </FormGroup>
+                </Grid>
+              </Grid>
+
               <FormGroup>
                 <Label for="modalidad">Modalidad:</Label>
                 <Input type="select" name="modalidad" id="modalidad" value={formulario.modalidad} onChange={handleChange} required>

@@ -11,15 +11,18 @@ import EditarEvento from "./pages/editar_evento";
 const AppRouter = () => {
   // Define el estado para la lista de eventos
   const [eventos, setEventos] = useState(() => {
+    console.log("[AppRouter/state] Verificando localStorage...");
     const eventosGuardados = localStorage.getItem("eventos");
     if (eventosGuardados) {
-      return JSON.parse(eventosGuardados);
+      console.log("[AppRouter/state] Encontrado datos en localStorage. Cargando lista de eventos...");
+      var retorno = JSON.parse(eventosGuardados);
     } else {
-      return [];
+      console.log("[AppRouter/state] No hay datos en localStorage. Creando lista vacia: []");
+      var retorno = [];
     }
+    console.log("[AppRouter/state] listaEventos: ", retorno);
+    return retorno;
   });
-
-  console.log(eventos);
 
   // Guarda el estado eventos en el localStorage
   useEffect(() => {
@@ -31,6 +34,7 @@ const AppRouter = () => {
       <Routes>
         <Route path="/" element={<HomePage eventos={eventos} setEventos={setEventos} />} /> // Pasa el estado eventos y la función setEventos al componente HomePage
         <Route path="/internal" element={<InternalPage />} />
+        <Route path="/formulario/:fechaSelec" element={<Formulario eventos={eventos} setEventos={setEventos} />} /> // Pasa el estado eventos y la función setEventos al componente Formulario
         <Route path="/formulario" element={<Formulario eventos={eventos} setEventos={setEventos} />} /> // Pasa el estado eventos y la función setEventos al componente Formulario
         <Route path="/eventos/:index" element={<Evento eventos={eventos} setEventos={setEventos} />} /> // Pasa el estado eventos al componente Evento
         <Route path="/eventos/editar/:index" element={<EditarEvento eventos={eventos} setEventos={setEventos} />} />
