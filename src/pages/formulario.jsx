@@ -1,14 +1,18 @@
 // Este es el componente Formulario que muestra el formulario para agregar un evento
 import React, { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { Form, FormGroup, Label, Input, Nav } from "reactstrap";
 import { useNavigate } from "react-router-dom";
-import PageHeader from "../components/page_header";
-import { Button, Box, Grid } from "@mui/material";
+
+import { Form, FormGroup, Label, Input, Nav } from "reactstrap";
+import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
+
+import { Button, Grid } from "@mui/material";
+
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CancelIcon from "@mui/icons-material/Cancel";
+
+import PageHeader from "../components/page_header";
 
 function Formulario({ eventos, setEventos }) {
   const [formulario, setFormulario] = useState({
@@ -76,7 +80,7 @@ function Formulario({ eventos, setEventos }) {
           </p>
         </Grid>
         <Grid item xs={6}>
-          <div className="Formulario">
+          <div className="FormularioContenedor">
             <h2>Agregar evento</h2>
             <Form onSubmit={agregarEvento}>
               <FormGroup>
@@ -85,9 +89,13 @@ function Formulario({ eventos, setEventos }) {
               </FormGroup>
               <FormGroup>
                 <Label for="fechaInicio">Fecha de inicio:</Label>
-                <DatePicker
-                  selected={formulario.dateInicio}
-                  onChange={(date) => {
+                <Input
+                  type="date"
+                  name="fechaInicio"
+                  id="fechaInicio"
+                  value={formulario.fechaInicio}
+                  onChange={(e) => {
+                    const date = new Date(e.target.value);
                     setFormulario({
                       ...formulario,
                       dateInicio: date,
@@ -95,25 +103,12 @@ function Formulario({ eventos, setEventos }) {
                       horaInicio: date.toLocaleTimeString().slice(0, 5),
                     });
                   }}
-                  dateFormat="dd/MM/yyyy"
-                  id="fechaInicio"
+                  required
                 />
               </FormGroup>
               <FormGroup>
                 <Label for="fechaTermino">Fecha de término:</Label>
-                <DatePicker
-                  selected={formulario.dateTermino}
-                  onChange={(date) => {
-                    setFormulario({
-                      ...formulario,
-                      dateTermino: date,
-                      fechaTermino: date.toLocaleDateString(),
-                      horaTermino: date.toLocaleTimeString().slice(0, 5),
-                    });
-                  }}
-                  dateFormat="dd/MM/yyyy"
-                  id="fechaTermino"
-                />
+                <Input type="date" name="fechaTermino" id="fechaTermino" value={formulario.dateInicio} onChange={handleChange} required />
               </FormGroup>
               <FormGroup>
                 <Label for="horaInicio">Hora de inicio:</Label>
