@@ -9,7 +9,7 @@ export const EventosRangos = ({ eventos, setEventos }) => {
     <div className="page">
       <PageHeader />
       {/* Renderiza el componente Calendario y le pasa el estado eventos como prop */}
-      <EventosRango eventos={eventos} setEventos={setEventos} />
+      <EventosRango eventos={eventos} />
     </div>
   );
 };
