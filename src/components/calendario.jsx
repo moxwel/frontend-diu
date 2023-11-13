@@ -30,6 +30,17 @@ function formatearFecha(fecha) {
   return { formattedDate, formattedTime };
 }
 
+// Funcion que recibe una fecha y devuelve un string con la fecha formateada.
+// Fecha en formato DD/MM/YYYY
+function formatoFechaChile(fecha) {
+  var fechaActual = new Date(fecha + "T00:00:00");
+  var year = fechaActual.getFullYear();
+  var month = ("0" + (fechaActual.getMonth() + 1)).slice(-2);
+  var day = ("0" + fechaActual.getDate()).slice(-2);
+
+  return day + "/" + month + "/" + year;
+}
+
 function Calendario({ eventos: lEventos }) {
   const [fechaSelec, setFecha] = useState(() => {
     console.log("[Calendario/state] Estableciendo fecha inicial...");
@@ -64,7 +75,12 @@ function Calendario({ eventos: lEventos }) {
   const mostrarEventos = (fecha) => {
     var { formattedDate, formattedTime } = formatearFecha(fecha);
 
-    return lEventos.filter((evento) => evento.fechaInicio === formattedDate);
+    var filtro = (evento) => evento.fechaInicio === formattedDate;
+
+    var eventosFiltrados = lEventos.map((detalles, index) => ({ index, detalles })).filter(({ detalles }) => filtro(detalles));
+
+    console.log("[Calendario/mostrarEventos] eventosFiltrados: ", eventosFiltrados);
+    return eventosFiltrados;
   };
 
   // Esta función devuelve un elemento JSX que muestra el número de eventos en una fecha del calendario
@@ -87,21 +103,21 @@ function Calendario({ eventos: lEventos }) {
       return (
         <div className="selected-date-content">
           <h2>Eventos del día {fechaSelec.toLocaleDateString()}</h2>
-          {eventosDelDia.map((evento, index) => (
+          {eventosDelDia.map(({ index, detalles }) => (
             <Card sx={{ border: "1px solid #ccc", margin: "10px", minWidth: "300px" }}>
               <CardContent>
                 <Typography sx={{ fontSize: 22, fontWeight: "bold" }} color="text.secondary" gutterBottom>
-                  {evento.nombre.toUpperCase()}
+                  {detalles.nombre.toUpperCase()}
                 </Typography>
                 <div sx={{ textAlign: "center" }}>
                   <p>
-                    Fecha: {evento.fechaInicio} - {evento.fechaTermino}
+                    Fecha: {formatoFechaChile(detalles.fechaInicio)} - {formatoFechaChile(detalles.fechaTermino)}
                   </p>
                   <p>
-                    Hora: {evento.horaInicio} - {evento.horaTermino}
+                    Hora: {detalles.horaInicio} - {detalles.horaTermino}
                   </p>
-                  <p>Modalidad: {evento.modalidad}</p>
-                  <p>Ubicación: {evento.modalidad === "online" ? <a href={evento.ubicacion}>{evento.ubicacion}</a> : evento.ubicacion}</p>
+                  <p>Modalidad: {detalles.modalidad}</p>
+                  <p>Ubicación: {detalles.modalidad === "online" ? <a href={detalles.ubicacion}>{detalles.ubicacion}</a> : detalles.ubicacion}</p>
                 </div>
               </CardContent>
               <CardActions>
