@@ -15,21 +15,72 @@ import CardContent from "@mui/material/CardContent";
 
 import Typography from "@mui/material/Typography";
 
-function Calendario({ eventos }) {
-  const [date, setDate] = useState(new Date());
+// Funcion que recibe una fecha y devuelve un objeto con la fecha y la hora formateadas
+// Fecha en formato YYYY-MM-DD y hora en formato HH:MM
+function formatearFecha(fecha) {
+  var year = fecha.getFullYear();
+  var month = ("0" + (fecha.getMonth() + 1)).slice(-2);
+  var day = ("0" + fecha.getDate()).slice(-2);
+  var hours = ("0" + fecha.getHours()).slice(-2);
+  var minutes = ("0" + fecha.getMinutes()).slice(-2);
+
+  var formattedDate = year + "-" + month + "-" + day;
+  var formattedTime = hours + ":" + minutes;
+
+  return { formattedDate, formattedTime };
+}
+
+// Funcion que recibe una fecha y devuelve un string con la fecha formateada.
+// Fecha en formato DD/MM/YYYY
+function formatoFechaChile(fecha) {
+  var fechaActual = new Date(fecha + "T00:00:00");
+  var year = fechaActual.getFullYear();
+  var month = ("0" + (fechaActual.getMonth() + 1)).slice(-2);
+  var day = ("0" + fechaActual.getDate()).slice(-2);
+
+  return day + "/" + month + "/" + year;
+}
+
+function Calendario({ eventos: lEventos }) {
+  const [fechaSelec, setFecha] = useState(() => {
+    console.log("[Calendario/state] Estableciendo fecha inicial...");
+    var retorno = new Date();
+
+    console.log("[Calendario/state] date: " + retorno);
+
+    return retorno;
+  });
 
   const onChange = (date) => {
-    setDate(date);
+    // Tomar la fecha seleccionada pero usar la hora actual
+    var nuevaFecha = new Date();
+    nuevaFecha.setFullYear(date.getFullYear());
+    nuevaFecha.setMonth(date.getMonth());
+    nuevaFecha.setDate(date.getDate());
+    nuevaFecha.setHours(new Date().getHours());
+    nuevaFecha.setMinutes(new Date().getMinutes());
+
+    console.log("[Calendario/onChange] date: " + nuevaFecha);
+    setFecha(nuevaFecha);
   };
 
   // Esta función devuelve el número de eventos que hay en una fecha dada
-  const contarEventos = (fecha) => {
-    return eventos.filter((evento) => evento.fechaInicio === fecha.toLocaleDateString()).length;
+  const contarEventos = (fechaSel) => {
+    var { formattedDate, formattedTime } = formatearFecha(fechaSel);
+
+    return lEventos.filter((evento) => evento.fechaInicio === formattedDate).length;
   };
 
   // Esta función devuelve un array con los eventos que hay en una fecha dada
   const mostrarEventos = (fecha) => {
-    return eventos.filter((evento) => evento.fechaInicio === fecha.toLocaleDateString());
+    var { formattedDate, formattedTime } = formatearFecha(fecha);
+
+    var filtro = (evento) => evento.fechaInicio === formattedDate;
+
+    var eventosFiltrados = lEventos.map((detalles, index) => ({ index, detalles })).filter(({ detalles }) => filtro(detalles));
+
+    console.log("[Calendario/mostrarEventos] eventosFiltrados: ", eventosFiltrados);
+    return eventosFiltrados;
   };
 
   // Esta función devuelve un elemento JSX que muestra el número de eventos en una fecha del calendario
@@ -47,26 +98,26 @@ function Calendario({ eventos }) {
 
   // Esta función devuelve un elemento JSX que muestra los detalles de los eventos en una fecha seleccionada
   const renderSelectedDateContent = () => {
-    const eventosDelDia = mostrarEventos(date);
+    const eventosDelDia = mostrarEventos(fechaSelec);
     if (eventosDelDia.length > 0) {
       return (
         <div className="selected-date-content">
-          <h2>Eventos del día {date.toLocaleDateString()}</h2>
-          {eventosDelDia.map((evento, index) => (
+          <h2>Eventos del día {fechaSelec.toLocaleDateString()}</h2>
+          {eventosDelDia.map(({ index, detalles }) => (
             <Card sx={{ border: "1px solid #ccc", margin: "10px", minWidth: "300px" }}>
               <CardContent>
                 <Typography sx={{ fontSize: 22, fontWeight: "bold" }} color="text.secondary" gutterBottom>
-                  {evento.nombre.toUpperCase()}
+                  {detalles.nombre.toUpperCase()}
                 </Typography>
                 <div sx={{ textAlign: "center" }}>
                   <p>
-                    Fecha: {evento.fechaInicio} - {evento.fechaTermino}
+                    Fecha: {formatoFechaChile(detalles.fechaInicio)} - {formatoFechaChile(detalles.fechaTermino)}
                   </p>
                   <p>
-                    Hora: {evento.horaInicio} - {evento.horaTermino}
+                    Hora: {detalles.horaInicio} - {detalles.horaTermino}
                   </p>
-                  <p>Modalidad: {evento.modalidad}</p>
-                  <p>Ubicación: {evento.modalidad === "online" ? <a href={evento.ubicacion}>{evento.ubicacion}</a> : evento.ubicacion}</p>
+                  <p>Modalidad: {detalles.modalidad}</p>
+                  <p>Ubicación: {detalles.modalidad === "online" ? <a href={detalles.ubicacion}>{detalles.ubicacion}</a> : detalles.ubicacion}</p>
                 </div>
               </CardContent>
               <CardActions>
@@ -93,11 +144,11 @@ function Calendario({ eventos }) {
       <Grid container direction="row">
         <Grid item xs={4}>
           <h1>Calendario</h1>
-          <Button component={Link} to="/formulario" variant="contained" color="warning" startIcon={<AddIcon />}>
+          <Button component={Link} to={`/formulario/${fechaSelec.toISOString()}`} variant="contained" color="warning" startIcon={<AddIcon />}>
             Añadir evento
           </Button>
           <p></p>
-          <Calendar onChange={onChange} value={date} tileContent={renderTileContent} />
+          <Calendar onChange={onChange} value={fechaSelec} tileContent={renderTileContent} />
         </Grid>
         <Grid item xs={8}>
           <h1>Eventos</h1>

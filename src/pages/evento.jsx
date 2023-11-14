@@ -11,6 +11,17 @@ import EventRepeatIcon from "@mui/icons-material/EventRepeat";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import EmailIcon from "@mui/icons-material/Email";
 
+// Funcion que recibe una fecha y devuelve un string con la fecha formateada.
+// Fecha en formato DD/MM/YYYY
+function formatoFechaChile(fecha) {
+  var fechaActual = new Date(fecha + "T00:00:00");
+  var year = fechaActual.getFullYear();
+  var month = ("0" + (fechaActual.getMonth() + 1)).slice(-2);
+  var day = ("0" + fechaActual.getDate()).slice(-2);
+
+  return day + "/" + month + "/" + year;
+}
+
 function Evento({ eventos, setEventos }) {
   // Obtiene el índice del evento desde el parámetro de la ruta
   const { index } = useParams();
@@ -77,7 +88,7 @@ function Evento({ eventos, setEventos }) {
           <div className="Evento">
             <h2>{evento.nombre}</h2>
             <p>
-              Fecha: {evento.fechaInicio} - {evento.fechaTermino}
+              Fecha: {formatoFechaChile(evento.fechaInicio)} - {formatoFechaChile(evento.fechaTermino)}
             </p>
             <p>
               Hora: {evento.horaInicio} - {evento.horaTermino}
