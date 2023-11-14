@@ -5,10 +5,10 @@ export const NavBar = () => {
   return (
     <nav className="nav-bar">
       <NavLink className={({ isActive }) => `nav-bar__link ${isActive ? "nav-bar__link--active" : ""}`} to="/">
-        Página de inicio
+        Página Administrador
       </NavLink>
-      <NavLink className={({ isActive }) => `nav-bar__link ${isActive ? "nav-bar__link--active" : ""}`} to="/internal">
-        Página Interna
+      <NavLink className={({ isActive }) => `nav-bar__link ${isActive ? "nav-bar__link--active" : ""}`} to="/eventos/proximos">
+        Página Visita
       </NavLink>
     </nav>
   );
