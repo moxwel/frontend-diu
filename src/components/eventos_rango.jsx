@@ -1,5 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Card, CardContent, Typography } from "@mui/material";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+import { Link } from "react-router-dom";
+import { Grid } from "@mui/material";
+import { Button } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+
+import Typography from "@mui/material/Typography";
 
 function EventosRango({ eventos }) {
   const [date, setDate] = useState(new Date());
@@ -57,16 +70,28 @@ function EventosRango({ eventos }) {
         {gruposEventos.map((grupo, index) => (
           <div className="row" key={index}>
             {grupo.map((evento, i) => (
-              <div className="col-md-4" key={i}>
-                <h3>{evento.nombre}</h3>
-                <p>Fecha de inicio: {evento.dateInicio ? new Date(evento.dateInicio).toLocaleDateString() : "N/A"}</p>
-                <p>Fecha de término: {evento.dateTermino ? new Date(evento.dateTermino).toLocaleDateString() : "N/A"}</p>
-                <p>Hora de inicio: {evento.horaInicio}</p>
-                <p>Hora de término: {evento.horaTermino}</p>
-                <p>Modalidad: {evento.modalidad}</p>
-                <p>Ubicación: {evento.ubicacion}</p>
-                <p>Descripción: {evento.descripcion}</p>
-              </div>
+              <Card sx={{ border: "1px solid #ccc", margin: "10px", minWidth: "300px" }}>
+                <CardContent>
+                  <Typography sx={{ fontSize: 22, fontWeight: "bold" }} color="text.secondary" gutterBottom>
+                    {evento.nombre.toUpperCase()}
+                  </Typography>
+                  <div sx={{ textAlign: "center" }}>
+                    <p>
+                      Fecha: {evento.fechaInicio} - {evento.fechaTermino}
+                    </p>
+                    <p>
+                      Hora: {evento.horaInicio} - {evento.horaTermino}
+                    </p>
+                    <p>Modalidad: {evento.modalidad}</p>
+                    <p>Ubicación: {evento.modalidad === "online" ? <a href={evento.ubicacion}>{evento.ubicacion}</a> : evento.ubicacion}</p>
+                  </div>
+                </CardContent>
+                <CardActions>
+                  <Button component={Link} to={`/eventos/${index}`} variant="contained" startIcon={<VisibilityIcon />}>
+                    Más Información
+                  </Button>
+                </CardActions>
+              </Card>
             ))}
           </div>
         ))}
