@@ -68,34 +68,38 @@ function EventosRango({ eventos }) {
             </select>
           </div>
         </div>
-        {gruposEventos.map((grupo, index) => (
-          <div className="row" key={index}>
-            {grupo.map((evento, i) => (
-              <Card sx={{ border: "1px solid #ccc", margin: "10px", minWidth: "300px" }}>
-                <CardContent>
-                  <Typography sx={{ fontSize: 22, fontWeight: "bold" }} color="text.secondary" gutterBottom>
-                    {evento.nombre.toUpperCase()}
-                  </Typography>
-                  <div sx={{ textAlign: "center" }}>
-                    <p>
-                      Fecha: {evento.fechaInicio} - {evento.fechaTermino}
-                    </p>
-                    <p>
-                      Hora: {evento.horaInicio} - {evento.horaTermino}
-                    </p>
-                    <p>Modalidad: {evento.modalidad}</p>
-                    <p>Ubicación: {evento.modalidad === "online" ? <a href={evento.ubicacion}>{evento.ubicacion}</a> : evento.ubicacion}</p>
-                  </div>
-                </CardContent>
-                <CardActions>
-                  <Button component={Link} to={`/eventos/proximos/${index}`} variant="contained" startIcon={<VisibilityIcon />}>
-                    Más Información
-                  </Button>
-                </CardActions>
-              </Card>
-            ))}
-          </div>
-        ))}
+        {gruposEventos.length === 0 ? (
+          <p>No hay eventos próximos en el rango solicitado</p>
+        ) : (
+          gruposEventos.map((grupo, index) => (
+            <div className="row" key={index}>
+              {grupo.map((evento, i) => (
+                <Card sx={{ border: "1px solid #ccc", margin: "10px", minWidth: "300px" }}>
+                  <CardContent>
+                    <Typography sx={{ fontSize: 22, fontWeight: "bold" }} color="text.secondary" gutterBottom>
+                      {evento.nombre.toUpperCase()}
+                    </Typography>
+                    <div sx={{ textAlign: "center" }}>
+                      <p>
+                        Fecha: {evento.fechaInicio} - {evento.fechaTermino}
+                      </p>
+                      <p>
+                        Hora: {evento.horaInicio} - {evento.horaTermino}
+                      </p>
+                      <p>Modalidad: {evento.modalidad}</p>
+                      <p>Ubicación: {evento.modalidad === "online" ? <a href={evento.ubicacion}>{evento.ubicacion}</a> : evento.ubicacion}</p>
+                    </div>
+                  </CardContent>
+                  <CardActions>
+                    <Button component={Link} to={`/eventos/proximos/${index}`} variant="contained" startIcon={<VisibilityIcon />}>
+                      Más Información
+                    </Button>
+                  </CardActions>
+                </Card>
+              ))}
+            </div>
+          ))
+        )}
       </div>
     );
   };
