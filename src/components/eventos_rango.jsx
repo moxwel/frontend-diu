@@ -89,7 +89,7 @@ function EventosRango({ eventos }) {
                   </div>
                 </CardContent>
                 <CardActions>
-                  <Button component={Link} to={`/eventos/${index}`} variant="contained" startIcon={<VisibilityIcon />}>
+                  <Button component={Link} to={`/eventos/proximos/${index}`} variant="contained" startIcon={<VisibilityIcon />}>
                     Más Información
                   </Button>
                 </CardActions>

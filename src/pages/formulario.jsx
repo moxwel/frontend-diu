@@ -55,6 +55,7 @@ function Formulario({ eventos, setEventos }) {
       modalidad: "",
       ubicacion: "",
       descripcion: "",
+      asistentes: 0,
     };
   });
 

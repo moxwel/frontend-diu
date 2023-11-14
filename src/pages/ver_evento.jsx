@@ -6,10 +6,7 @@ import { Compartir } from "../components/compartir_evento";
 import PageHeader from "../components/page_header";
 import { Grid } from "@mui/material";
 import { Button } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EventRepeatIcon from "@mui/icons-material/EventRepeat";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import EmailIcon from "@mui/icons-material/Email";
 
 function VerEvento({ eventos, setEventos }) {
   // Obtiene el índice del evento desde el parámetro de la ruta
@@ -20,7 +17,7 @@ function VerEvento({ eventos, setEventos }) {
   const navigate = useNavigate();
 
   const volver = () => {
-    navigate("/");
+    navigate("/eventos/proximos");
   };
 
   return (
@@ -29,7 +26,6 @@ function VerEvento({ eventos, setEventos }) {
 
       <Grid container direction="row">
         <Grid item xs={4}>
-          <h2>Administrar</h2>
           <p>
             <Button variant="contained" color="info" onClick={volver} startIcon={<ArrowBackIcon />}>
               Volver

@@ -8,6 +8,7 @@ import Formulario from "./pages/formulario";
 import Evento from "./pages/evento";
 import EditarEvento from "./pages/editar_evento";
 import EventosRangos from "./pages/eventos_r";
+import VerEvento from "./pages/ver_evento";
 
 const AppRouter = () => {
   // Define el estado para la lista de eventos
@@ -40,6 +41,7 @@ const AppRouter = () => {
         <Route path="/eventos/:index" element={<Evento eventos={eventos} setEventos={setEventos} />} /> // Pasa el estado eventos al componente Evento
         <Route path="/eventos/editar/:index" element={<EditarEvento eventos={eventos} setEventos={setEventos} />} />
         <Route path="eventos/proximos" element={<EventosRangos eventos={eventos} setEventos={setEventos} />} /> // Pasa el estado eventos al componente EventosRango
+        <Route path="/eventos/proximos/:index" element={<VerEvento eventos={eventos} setEventos={setEventos} />} /> // Pasa el estado eventos al componente VerEvento
       </Routes>
     </BrowserRouter>
   );
