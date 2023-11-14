@@ -14,7 +14,33 @@ import CardContent from "@mui/material/CardContent";
 
 import Typography from "@mui/material/Typography";
 
-function EventosRango({ eventos }) {
+// Funcion que recibe una fecha y devuelve un string con la fecha formateada.
+// Fecha en formato DD/MM/YYYY
+function formatoFechaChile(fecha) {
+  var fechaActual = new Date(fecha + "T00:00:00");
+  var year = fechaActual.getFullYear();
+  var month = ("0" + (fechaActual.getMonth() + 1)).slice(-2);
+  var day = ("0" + fechaActual.getDate()).slice(-2);
+
+  return day + "/" + month + "/" + year;
+}
+
+// Funcion que recibe una fecha y devuelve un objeto con la fecha y la hora formateadas
+// Fecha en formato YYYY-MM-DD y hora en formato HH:MM
+function formatearFecha(fecha) {
+  var year = fecha.getFullYear();
+  var month = ("0" + (fecha.getMonth() + 1)).slice(-2);
+  var day = ("0" + fecha.getDate()).slice(-2);
+  var hours = ("0" + fecha.getHours()).slice(-2);
+  var minutes = ("0" + fecha.getMinutes()).slice(-2);
+
+  var formattedDate = year + "-" + month + "-" + day;
+  var formattedTime = hours + ":" + minutes;
+
+  return { formattedDate, formattedTime };
+}
+
+function EventosRango({ eventos: lEventos }) {
   const [date, setDate] = useState(new Date());
   const [rango, setRango] = useState([null, null]);
   const [dias, setDias] = useState(7);
@@ -34,13 +60,19 @@ function EventosRango({ eventos }) {
     if (rango[0] && rango[1]) {
       const inicio = new Date(rango[0]).getTime();
       const fin = new Date(rango[1]).getTime();
-      const eventosFiltrados = eventos.filter((evento) => {
-        const fechaInicio = new Date(evento.dateInicio).getTime();
+
+      console.log("[EventosRango/filtrarEventos] inicio: ", inicio + ", fin: ", fin);
+      console.log("[EventosRango/filtrarEventos] lEventos: ", lEventos);
+
+      const eventosFiltrados = lEventos.filter((evento) => {
+        const fechaInicio = new Date(evento.fechaInicio).getTime();
         return fechaInicio >= inicio && fechaInicio <= fin;
       });
 
+      console.log("[EventosRango/filtrarEventos] eventosFiltrados: ", eventosFiltrados);
+
       const eventosAgrupados = eventosFiltrados.reduce((grupos, evento) => {
-        const fecha = new Date(evento.dateInicio).toDateString();
+        const fecha = new Date(evento.fechaInicio).toDateString();
         if (!grupos[fecha]) {
           grupos[fecha] = [];
         }
@@ -79,7 +111,7 @@ function EventosRango({ eventos }) {
                   </Typography>
                   <div sx={{ textAlign: "center" }}>
                     <p>
-                      Fecha: {evento.fechaInicio} - {evento.fechaTermino}
+                      Fecha: {formatoFechaChile(evento.fechaInicio)} - {formatoFechaChile(evento.fechaTermino)}
                     </p>
                     <p>
                       Hora: {evento.horaInicio} - {evento.horaTermino}
