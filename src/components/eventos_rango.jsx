@@ -59,8 +59,10 @@ function EventosRango({ eventos }) {
       <div className="container text-center">
         <div className="row">
           <div className="col-md-12">
-            <label htmlFor="dias">Selecciona la cantidad de días:</label>
-            <select id="dias" value={dias} onChange={cambiarDias}>
+            <label htmlFor="dias" style={{ marginRight: "10px" }}>
+              Selecciona la cantidad de días:
+            </label>
+            <select id="dias" value={dias} onChange={cambiarDias} style={{ width: "200px", height: "30px", fontSize: "16px" }}>
               <option value="7">7</option>
               <option value="15">15</option>
               <option value="30">30</option>
