@@ -1,23 +1,25 @@
-// Este es el componente Evento que muestra la página de un evento con su información
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Compartir } from "../components/compartir_evento";
 import PageHeader from "../components/page_header";
-import { Grid } from "@mui/material";
-import { Button } from "@mui/material";
+import { Grid, Button, Box } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 
 function VerEvento({ eventos, setEventos }) {
-  // Obtiene el índice del evento desde el parámetro de la ruta
   const { index } = useParams();
-  // Obtiene el evento desde la lista de eventos
   const evento = eventos[index];
 
   const navigate = useNavigate();
 
   const volver = () => {
     navigate("/eventos/proximos");
+  };
+
+  const confirmarAsistencia = () => {
+    const nuevosEventos = [...eventos];
+    nuevosEventos[index].asistentes += 1;
+    setEventos(nuevosEventos);
   };
 
   return (
@@ -44,6 +46,12 @@ function VerEvento({ eventos, setEventos }) {
             <p>Modalidad: {evento.modalidad}</p>
             <p>Ubicación: {evento.modalidad === "online" ? <a href={evento.ubicacion}>{evento.ubicacion}</a> : evento.ubicacion}</p>
             <p>Descripción: {evento.descripcion}</p>
+            <Box border={1} borderColor="primary.main" borderRadius={16} padding={1} marginY={2} textAlign="center">
+              Asistentes: {evento.asistentes}
+            </Box>
+            <Button variant="contained" color="warning" onClick={confirmarAsistencia} startIcon={<EventAvailableIcon />}>
+              Confirmar Asistencia
+            </Button>
             <Compartir />
           </div>
         </Grid>

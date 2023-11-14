@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { Link } from "react-router-dom";
 import { Grid } from "@mui/material";
@@ -20,7 +19,7 @@ function EventosRango({ eventos }) {
   const [dias, setDias] = useState(7);
 
   useEffect(() => {
-    const hoy = date;
+    const hoy = new Date(date);
     const fin = new Date(date);
     fin.setDate(hoy.getDate() + dias);
     setRango([hoy, fin]);
@@ -35,7 +34,7 @@ function EventosRango({ eventos }) {
       const inicio = new Date(rango[0]).getTime();
       const fin = new Date(rango[1]).getTime();
       const eventosFiltrados = eventos.filter((evento) => {
-        const fechaInicio = new Date(evento.dateInicio).getTime();
+        const fechaInicio = new Date(evento.fechaInicio).getTime();
         return fechaInicio >= inicio && fechaInicio <= fin;
       });
 
