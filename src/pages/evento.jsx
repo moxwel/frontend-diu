@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { Compartir } from "../components/compartir_evento";
 import PageHeader from "../components/page_header";
-import { Grid } from "@mui/material";
+import { Grid, Box } from "@mui/material";
 import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EventRepeatIcon from "@mui/icons-material/EventRepeat";
@@ -96,6 +96,9 @@ function Evento({ eventos, setEventos }) {
             <p>Modalidad: {evento.modalidad}</p>
             <p>Ubicación: {evento.modalidad === "online" ? <a href={evento.ubicacion}>{evento.ubicacion}</a> : evento.ubicacion}</p>
             <p>Descripción: {evento.descripcion}</p>
+            <Box border={1} borderColor="primary.main" borderRadius={16} padding={1} marginY={2} textAlign="center">
+              Asistentes: {evento.asistentes}
+            </Box>
             <Compartir />
           </div>
         </Grid>
